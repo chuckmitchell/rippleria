@@ -1,227 +1,195 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>jQuery Rippleria</title>
 
-  <title>jQuery Rippleria</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/jquery.rippleria.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <script src="js/jquery.rippleria.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/jquery.rippleria.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/github-gist.min.css">
 
-  <style>
-    body {
-      font-family: "Roboto", sans-serif;
-      font-size: 16px;
-      line-height: 32px;
-    }
+    <style>
+        * {
+            outline: none!important;
+        }
 
-    * {
-      outline: none!important;
-    }
+        .container {
+            max-width: 840px;
+        }
 
-    .site-header {
-      background: #9b4dca;
-      color: white;
-    }
+        pre {
+            background-color: white;
+            overflow-x: auto;
+        }
 
-    .text-muted {
-      color: rgba(255,255,255,0.5);
-    }
+        pre code {
+            overflow-wrap: normal;
+            white-space: pre;
+        }
 
-    .btn {
-      border-radius: 0;
-      text-transform: uppercase;
-    }
+        body {
+            font-family: "Roboto", sans-serif;
+            font-size: 1.5em;
+        }
 
-    .btn-sample { 
-      color: #ffffff; 
-      background-color: #9B4DCA; 
-      border-color: #743997; 
-    } 
-     
-    .btn-sample:hover, 
-    .btn-sample:focus, 
-    .btn-sample:active, 
-    .btn-sample.active, 
-    .open .dropdown-toggle.btn-sample { 
-      color: #ffffff; 
-      background-color: #743997; 
-      border-color: #743997; 
-    } 
-     
-    .btn-sample:active, 
-    .btn-sample.active, 
-    .open .dropdown-toggle.btn-sample { 
-      background-image: none; 
-    } 
-     
-    .btn-sample.disabled, 
-    .btn-sample[disabled], 
-    fieldset[disabled] .btn-sample, 
-    .btn-sample.disabled:hover, 
-    .btn-sample[disabled]:hover, 
-    fieldset[disabled] .btn-sample:hover, 
-    .btn-sample.disabled:focus, 
-    .btn-sample[disabled]:focus, 
-    fieldset[disabled] .btn-sample:focus, 
-    .btn-sample.disabled:active, 
-    .btn-sample[disabled]:active, 
-    fieldset[disabled] .btn-sample:active, 
-    .btn-sample.disabled.active, 
-    .btn-sample[disabled].active, 
-    fieldset[disabled] .btn-sample.active { 
-      background-color: #9B4DCA; 
-      border-color: #743997; 
-    } 
-     
-    .btn-sample .badge { 
-      color: #9B4DCA; 
-      background-color: #ffffff; 
-    }
+        .site-header, .site-footer {
+            background: #efefef;
+            padding: 15px 0;
+            border-bottom: 1px solid #ccc;
+        }
 
-    pre {
-      background-color: white;
-      border-radius: 0;
-    }
+        .site-footer {
+            border-bottom: none;
+            border-top: 1px solid #ccc;
+        }
 
-    #rippleria img {
-      width: 100%;
-      height: auto;
-    }
-  </style>
+        h1 {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 767px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 3px;
+            }
+        }
+
+        #rippleria img {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+        }
+    </style>
 </head>
 <body>
-
-  <header class="site-header">
-    <section class="container">
-      <h1 class="text-center">jQuery Rippleria</h1>
-      <p class="text-center">A lightweight yet customizable jQuery plugin for implementing Material Design inspired ripple effect.</p>
-      <p class="text-center">
-        <a data-rippleria class="btn btn-default rippleria-dark" href="https://github.com/nsept/rippleria/zipball/master">Download .zip</a>
-        <a data-rippleria class="btn btn-default rippleria-dark" href="https://github.com/nsept/rippleria/tarball/master">Download .tar.gz</a>
-        <a data-rippleria class="btn btn-default rippleria-dark" href="https://github.com/nsept/rippleria">View on Github</a>
-      </p>
-      <p class="text-center text-muted"><i><small>Currently v1.2.0</small></i></p>
-    </section>
-  </header>
-
-  <section class="container">
-    <h3 class="text-center">Get Started</h3>
-
-    
-    <div class="row">
-      
-      <div class="col-md-8 col-md-offset-2">
-        <pre><code>bower i -S rippleria</code></pre>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <pre><code>&#x3C;link rel=&#x22;stylesheet&#x22; href=&#x22;jquery.rippleria.css&#x22;&#x3E;
-&#x3C;script src=&#x22;//code.jquery.com/jquery-2.1.4.min.js&#x22;&#x3E;&#x3C;/script&#x3E;
-&#x3C;script src=&#x22;jquery.rippleria.js&#x22;&#x3E;&#x3C;/script&#x3E;</code></pre>
-      </div>
-    </div>
-  </section>
-
-  <section class="container">
-    <h3 class="text-center">Demos</h3>
-    <p class="text-center">
-      <button data-rippleria class="btn btn-lg btn-sample">Click Me!</button>
-      <button data-rippleria class="btn btn-lg btn-default rippleria-dark">And Me!</button>
-    </p>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2"><pre><code class="html">&#x3C;button data-rippleria class=&#x22;button&#x22;&#x3E;Click Me!&#x3C;/button&#x3E;
-&#x3C;button data-rippleria class=&#x22;button button-outline rippleria-dark&#x22;&#x3E;And Me!&#x3C;/button&#x3E;</code></pre></div>
-    </div>
-
-    <p class="text-center">
-      <button data-rippleria 
-        data-rippleria-color="rgba(100,178,53,.35)" 
-        data-rippleria-duration="1000" 
-        data-rippleria-easing="cubic-bezier(0.680, -0.380, 0.385, 1.650)" 
-        class="btn btn-lg btn-default">Custom</button>
-    </p>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2"><pre><code class="html">&#x3C;button data-rippleria 
-  data-rippleria-color=&#x22;rgba(100,178,53,.35)&#x22; 
-  data-rippleria-duration=&#x22;1000&#x22; 
-  data-rippleria-easing=&#x22;cubic-bezier(0.680, -0.380, 0.385, 1.650)&#x22; 
-  class=&#x22;btn btn-lg btn-default&#x22;&#x3E;Custom&#x3C;/button&#x3E;</code></pre></div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="text-center">
-          <a style="display: inline-block;" id="rippleria" href="#">
-            <img src="http://www.lovethispic.com/uploaded_images/15163-Pretty-Girl.jpg" alt="image">
-          </a>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="text-center">jQuery Rippleria</h1>
+            <p class="text-center">A lightweight yet customizable jQuery plugin for implementing Material Design inspired ripple click / tap effects.</p>
+            <p class="text-center">
+                <a data-rippleria class="btn btn-default" href="https://github.com/nsept/rippleria/zipball/master">Download .zip</a>
+                <a data-rippleria class="btn btn-default" href="https://github.com/nsept/rippleria/tarball/master">Download .tar.gz</a>
+                <a data-rippleria class="btn btn-success" href="https://github.com/nsept/rippleria">View on Github</a>
+            </p>
+            <div class="text-muted text-center small">Currently v1.3.0</div>
         </div>
-        
-        <script>
-          function randInt(min, max) {
-            var rand = min + Math.random() * (max - min)
-            rand = Math.round(rand);
-            return rand;
-          }
+    </header>
 
-          $('#rippleria').rippleria({
+    <div class="container">
+        <h2>Installation</h2>
+<pre><code>bower i -S rippleria</code></pre>
+<pre><code>&lt;head&gt;
+    ...
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/bower_components/rippleria/css/jquery.rippleria.min.css&quot;&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    ...
+    &lt;script src=&quot;//code.jquery.com/jquery-2.1.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/bower_components/rippleria/js/jquery.rippleria.min.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+    </div>
+
+    <div class="container">
+        <h2>Usage</h2>
+
+        <p class="text-center">
+            <button data-rippleria class="btn btn-primary">Dark</button>
+            <button data-rippleria class="btn btn-default">Light</button>
+
+            <button data-rippleria
+                    data-rippleria-color="rgba(100,178,53,.35)"
+                    data-rippleria-duration="1000"
+                    data-rippleria-easing="cubic-bezier(0.680, -0.380, 0.385, 1.650)"
+                    class="btn btn-default">Custom</button>
+
+        </p>
+
+<pre><code class="html">&#x3C;button data-rippleria class=&#x22;btn btn-primary&#x22;&#x3E;Dark&#x3C;/button&#x3E;
+&#x3C;button data-rippleria class=&#x22;btn btn-default&#x22;&#x3E;Light&#x3C;/button&#x3E;
+
+&#x3C;button data-rippleria
+data-rippleria-color=&#x22;rgba(100,178,53,.35)&#x22;
+data-rippleria-duration=&#x22;1000&#x22;
+data-rippleria-easing=&#x22;cubic-bezier(0.680, -0.380, 0.385, 1.650)&#x22;
+class=&#x22;btn btn-default&#x22;&#x3E;Custom&#x3C;/button&#x3E;
+</code></pre>
+
+        <div class="text-center">
+            <a style="display: inline-block;" id="rippleria" href="#">
+                <img src="http://www.c-heads.com/wp-content/uploads/2015/11/C-Heads-x-Sam-Livm-12.jpg" alt="image">
+            </a>
+        </div>
+
+<pre><code class="html">&lt;div class=&quot;text-center&quot;&gt;
+    &lt;a style=&quot;display: inline-block;&quot; id=&quot;rippleria&quot; href=&quot;#&quot;&gt;
+        &lt;img src=&quot;http://www.lovethispic.com/uploaded_images/15163-Pretty-Girl.jpg&quot; alt=&quot;image&quot;&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $(&#039;#rippleria&#039;).rippleria({
+        // aniamtion speed
+        duration: 750,
+        // custom easing effect
+        easing: &#039;ease-in&#039;
+    });
+
+    $(&#039;#rippleria&#039;).click(function(e) {
+        e.preventDefault();
+
+        var randInt = function (min, max) {
+        var rand = min + Math.random() * (max - min)
+        rand = Math.round(rand);
+        return rand;
+    };
+
+    $(this).rippleria(&#039;changeColor&#039;,
+            &#039;rgba(&#039;+randInt(0,200)+&#039;,&#039;+randInt(0,200)+&#039;,&#039;+randInt(0,200)+&#039;,0.&#039;+randInt(3,5));
+    });
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container text-center">
+            By <a href="https://github.com/nsept">Nsept</a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script src="./js/jquery.rippleria.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script>
+        $('#rippleria').rippleria({
             // aniamtion speed
             duration: 750,
             // custom easing effect
-            easing: 'linear',
-            // custom color
-            color: undefined
-          });
+            easing: 'ease-in'
+        });
 
-          $('#rippleria').click(function(e) {
+        $('#rippleria').click(function(e) {
             e.preventDefault();
-            $(this).rippleria('changeColor', 
-              'rgba('+randInt(0,255)+','+randInt(0,255)+','+randInt(0,255)+',0.'+randInt(3,5));
-          });
-        </script>
 
-        <pre><code class="html">&#x3C;div class=&#x22;text-center&#x22;&#x3E;
-  &#x3C;a style=&#x22;display: inline-block;&#x22; id=&#x22;rippleria&#x22; href=&#x22;#&#x22;&#x3E;
-    &#x3C;img src=&#x22;http://www.lovethispic.com/uploaded_images/15163-Pretty-Girl.jpg&#x22; alt=&#x22;image&#x22;&#x3E;
-  &#x3C;/a&#x3E;
-&#x3C;/div&#x3E;
+            var randInt = function (min, max) {
+                var rand = min + Math.random() * (max - min)
+                rand = Math.round(rand);
+                return rand;
+            };
 
-&#x3C;script&#x3E;
-  function randInt(min, max) {
-    var rand = min + Math.random() * (max - min)
-    rand = Math.round(rand);
-    return rand;
-  }
-
-  $(&#x27;#rippleria&#x27;).rippleria({
-    // aniamtion speed
-    duration: 750,
-    // custom easing effect
-    easing: &#x27;linear&#x27;,
-    // custom color
-    color: undefined
-  });
-
-  $(&#x27;#rippleria&#x27;).click(function(e) {
-    e.preventDefault();
-    $(this).rippleria(&#x27;changeColor&#x27;, 
-      &#x27;rgba(&#x27;+randInt(0,255)+&#x27;,&#x27;+randInt(0,255)+&#x27;,&#x27;+randInt(0,255)+&#x27;,0.&#x27;+randInt(3,5));
-  });
-&#x3C;/script&#x3E;</code></pre>
-      </div>
-    </div>
-  </section>
+            $(this).rippleria('changeColor',
+                    'rgba('+randInt(0,200)+','+randInt(0,200)+','+randInt(0,200)+',0.'+randInt(3,5));
+        });
+    </script>
 </body>
 </html>
