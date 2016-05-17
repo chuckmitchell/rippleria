@@ -1,13 +1,11 @@
 ;(function($, window, document, undefined) {
   function Rippleria(element, options) {
-    var base = this;
-
     this.$element = $(element);
     this.options = $.extend({}, Rippleria.Defaults, this._getOptionsFromElementAttributes(), options);
 
     this._prepare();
     this._bind();
-  };
+  }
 
   Rippleria.prototype._bind = function() {
     var elem = this.$element,
@@ -19,14 +17,17 @@
     eventType = isTouchSupported == true ? 'touchend.rippleria' : 'click.rippleria';
 
     this.$element.bind(eventType, function(e) {
-      var ink = $("<div class='rippleria-ink'></div>");
+      var ink = $("<div class='rippleria-ink'/>");
       elem.append(ink);
 
       if (options.color != undefined) {
         ink.css('background-color', options.color);
       }
 
-      ink.css('animation', 'rippleria ' + options.duration / 1000 + 's ' + options.easing);
+      var animation = 'rippleria ' + options.duration / 1000 + 's ' + options.easing;
+
+      ink.css('animation', animation);
+      ink.css('-webkit-animation', animation);
 
       setTimeout(function() {
         ink.remove();
@@ -48,7 +49,7 @@
       
       ink.css({top: y + 'px', left: x + 'px'});
     });
-  }
+  };
 
   Rippleria.prototype._prepare = function() {
     var elem = this.$element;
@@ -61,6 +62,49 @@
 
     if(elem.find('img')[0] != undefined) {
       elem.on('dragstart', function(e) { e.preventDefault(); });
+    }
+
+    if(this.options.detectBrightness) {
+      var r,g,b,brightness,
+          colour = this.$element.css("background-color");
+
+      if(colour == 'transparent') {
+        var getParentBackground = function(elem) {
+          var colour = elem.css("background-color");
+
+          if(elem.length != 0) {
+            if(colour == 'transparent') {
+              return getParentBackground(elem.parent());
+            }
+          }
+
+          return colour;
+        };
+
+        colour = getParentBackground(this.$element.parent());
+      }
+
+      if (colour.match(/^rgb/)) {
+        colour = colour.match(/rgb\(([^)]+)\)/)[1];
+        colour = colour.split(/ *, */).map(Number);
+        r = colour[0];
+        g = colour[1];
+        b = colour[2];
+      } else if ('#' == colour[0] && 7 == colour.length) {
+        r = parseInt(colour.slice(1, 3), 16);
+        g = parseInt(colour.slice(3, 5), 16);
+        b = parseInt(colour.slice(5, 7), 16);
+      } else if ('#' == colour[0] && 4 == colour.length) {
+        r = parseInt(colour[1] + colour[1], 16);
+        g = parseInt(colour[2] + colour[2], 16);
+        b = parseInt(colour[3] + colour[3], 16);
+      }
+
+      brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+      if (brightness > 150) {
+        this.$element.addClass("rippleria-dark");
+      }
     }
   };
 
@@ -80,20 +124,21 @@
 
   Rippleria.prototype.changeColor = function(color) {
     this.options.color = color;
-  }
+  };
 
   Rippleria.prototype.changeEasing = function(easing) {
     this.options.easing = easing;
-  }
+  };
 
   Rippleria.prototype.changeDuration = function(duration) {
     this.options.duration = duration;
-  }
+  };
 
   Rippleria.Defaults = {
     duration: 750,
     easing: 'linear',
-    color: undefined
+    color: undefined,
+    detectBrightness: true
   };
 
   $.fn.rippleria = function(option) {

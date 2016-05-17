@@ -14,9 +14,9 @@ $ bower i -S rippleria
 
 1. Load the stylesheet ```jquery.rippleria.css``` in the head section and the JavaScript ```jquery.rippleria.js``` after jQuery library.
     ```html
-    <link rel="stylesheet" href="jquery.rippleria.css">
+    <link rel="stylesheet" href="/path/to/jquery.rippleria.css">
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="jquery.rippleria.js"></script>
+    <script src="/path/to/jquery.rippleria.js"></script>
     ```
 
 2. Add the ```data-rippleria``` attribute to the DOM element where you want to implement the ripple click effect.
@@ -33,10 +33,8 @@ $ bower i -S rippleria
       Click me
     </button>
     ```
-4. The CSS modifiers.
-    * ```.rippleria-dark```: dark ripple effect
 
-5. You can also apply the ripple click effect to any block elements and pass in the options via JavaScript.
+4. You can also apply the ripple click effect to any block elements and pass in the options via JavaScript.
     ```js
     $('.selector').rippleria({
     
@@ -49,6 +47,8 @@ $ bower i -S rippleria
       // custom color
       color: undefined
       
+      // enable automatically adding .rippleria-dark class to the dark elements (appeared with 1.3)
+      detectBrightness: true
     });
 
     $('.selector').rippleria("changeDuration", "500");
@@ -58,6 +58,3 @@ $ bower i -S rippleria
 
 ##Browsers
 Firefox, Chrome, IE10+, Opera, Safari
-
-##License
-MIT license.
