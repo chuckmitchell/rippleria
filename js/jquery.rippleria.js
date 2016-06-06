@@ -18,9 +18,12 @@
         eventType = isTouchSupported == true ? 'touchend.rippleria' : 'click.rippleria';
 
         this.$element.bind(eventType, function(e) {
-            //Do not fire if ontouchend is outside element.
-            e.preventDefault();
+            
+            if (isTouchSupported) {
+                e.preventDefault();
+            }
 
+            //Do not fire if ontouchend is outside element.
             if (dragging) {
                 return false;
             }
@@ -39,7 +42,9 @@
 
             setTimeout(function() {
                 ink.remove();
-                $(e.target).click();
+                if (isTouchSupported) {
+                    $(e.target).click();
+                }
             }, parseFloat(options.duration));
 
             if(!ink.height() && !ink.width()) {
@@ -169,7 +174,7 @@
         duration: 750,
         easing: 'linear',
         color: undefined,
-        detectBrightness: true
+        detectBrightness: true,
     };
 
     $.fn.rippleria = function(option) {
