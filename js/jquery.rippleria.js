@@ -11,12 +11,17 @@
         var elem = this.$element,
             options = this.options,
             ink, d, x, y, isTouchSupported, eventType;
+        var dragging = false;
 
         isTouchSupported = 'ontouchend' in window || window.DocumentTouch && document instanceof DocumentTouch;
 
         eventType = isTouchSupported == true ? 'touchend.rippleria' : 'click.rippleria';
 
         this.$element.bind(eventType, function(e) {
+            if (dragging) {
+                return false;
+            }
+
             var ink = $("<div class='rippleria-ink'/>");
             elem.append(ink);
 
@@ -49,6 +54,20 @@
 
             ink.css({top: y + 'px', left: x + 'px'});
         });
+
+        if (isTouchSupported == true) {
+            this.$element.bind('touchstart', function(e) {
+                //e.preventDefault();
+                dragging = false;
+            });           
+        }
+        if (isTouchSupported == true) {
+            this.$element.bind('touchmove', function(e) {
+                //e.preventDefault();
+                dragging = true;
+                return true;
+            });
+        }
     };
 
     Rippleria.prototype._prepare = function() {
