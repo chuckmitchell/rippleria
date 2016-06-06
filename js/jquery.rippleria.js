@@ -133,7 +133,7 @@
 
             brightness = (r * 299 + g * 587 + b * 114) / 1000;
 
-            if (brightness > 150) {
+            if (true) { //brightness > 150) {
                 this.$element.addClass("rippleria-dark");
             }
         }
