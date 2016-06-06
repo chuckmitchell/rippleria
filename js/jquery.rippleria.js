@@ -18,6 +18,9 @@
         eventType = isTouchSupported == true ? 'touchend.rippleria' : 'click.rippleria';
 
         this.$element.bind(eventType, function(e) {
+            //Do not fire if ontouchend is outside element.
+            e.preventDefault();
+
             if (dragging) {
                 return false;
             }
@@ -36,6 +39,7 @@
 
             setTimeout(function() {
                 ink.remove();
+                $(e.target).click();
             }, parseFloat(options.duration));
 
             if(!ink.height() && !ink.width()) {
@@ -61,6 +65,7 @@
                 dragging = false;
             });           
         }
+
         if (isTouchSupported == true) {
             this.$element.bind('touchmove', function(e) {
                 //e.preventDefault();
